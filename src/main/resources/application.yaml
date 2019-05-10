@@ -1,0 +1,10 @@
+file:
+  default:
+    input: /var/tmp/input
+    output: /var/tmp/output
+    path: /var/tmp/
+
+  nullFile: /var/tmp/zero
+  randomFile: /var/tmp/random
+  semiRandomFile: /var/tmp/semiRandom
+
