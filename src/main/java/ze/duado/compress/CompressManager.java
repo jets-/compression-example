@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import ze.duado.compress.service.Compress;
 import ze.duado.compress.service.IOUtil;
 
+import java.util.function.Function;
+
 @Component
 public class CompressManager {
 
@@ -37,13 +39,12 @@ public class CompressManager {
         double finish = System.nanoTime();
         LOG.info("input-size:    " + input.length);
         LOG.info("output-size:   " + output.length);
-        LOG.info(compressor.getName() + " duração de compressão: " + (finish - start)/1000000 + " ms");
+        LOG.info("time:          ~" + (finish - start)/1000000 + " ms");
         start = System.nanoTime();
         byte[] restored = compressor.decompress(output, input.length);
         finish = System.nanoTime();
-        LOG.info("output-size:   " + output.length);
         LOG.info("restored-size: " + restored.length);
-        LOG.info(compressor.getName() + " duração de decompressão: " + (finish - start)/1000000 + " ms");
+        LOG.info("time:          ~" + (finish - start)/1000000 + " ms");
         write(output, outputParam.concat("." + compressor.getName()));
         write(restored, outputParam.concat("." + compressor.getName()).concat(".restored"));
     }
@@ -96,9 +97,5 @@ public class CompressManager {
         } else {
             ioUtil.write(output, outputParam);
         }
-    }
-
-    public void full() {
-
     }
 }

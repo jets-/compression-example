@@ -20,14 +20,7 @@ public class LZ4Impl implements Compress {
 
     @Override
     public byte[] compress(byte[] data) {
-        final int decompressedLength = data.length;
-        LZ4Compressor compressor = factory.fastCompressor();
-
-        int maxCompressedLength = compressor.maxCompressedLength(decompressedLength);
-        byte[] compressed = new byte[maxCompressedLength];
-        int compressedLength = compressor.compress(data, 0, decompressedLength, compressed, 0, maxCompressedLength);
-
-        return compressed;
+        return factory.fastCompressor().compress(data);
     }
 
     @Override
@@ -42,10 +35,7 @@ public class LZ4Impl implements Compress {
     @Override
     public byte[] decompress(byte[] compressed, Integer decompressedLen) {
         LZ4FastDecompressor decompressor = factory.fastDecompressor();
-        byte[] restored = new byte[decompressedLen];
-        int compressedLength = decompressor.decompress(compressed, 0, restored, 0, decompressedLen);
-
-        return restored;
+        return decompressor.decompress(compressed, decompressedLen);
     }
 
 

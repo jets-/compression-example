@@ -21,7 +21,7 @@ public class ZstdImpl implements Compress {
 
     @Override
     public byte[] decompress(byte[] data) {
-        byte[] restored = new byte[1000000000];
+        byte[] restored = new byte[1];
         Zstd.decompress(restored, data);
         return restored;
     }
